@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 
 const ReasonSection = () => {
   useEffect(() => {
-    Aos.init({ duration: 2000, offset: 200, delay: 300 });
+    Aos.init({ duration: 1000, offset: 200, delay: 300 });
   }, []);
 
   return (

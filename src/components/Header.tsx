@@ -1,5 +1,5 @@
 import logo from "./../assets/logo.png";
-
+import { Link } from "react-scroll";
 const Header = () => {
   return (
     <div className="fixed w-full z-[100] top-0 bg-header">
@@ -14,18 +14,37 @@ const Header = () => {
               />
             </div>
             <div className="hidden lg:flex justify-end items-center gap-[32px] h-[60px] pl-[96px] pr-[36px] bg-[#fff] rounded-[12px] ">
-              <p className="text-[#172554] text-lg font-bold cursor-pointer">
-                Trang chủ
-              </p>
-              <p className="text-[#172554] text-lg font-bold cursor-pointer">
-                Giới thiệu
-              </p>
-              <p className="text-[#172554] text-lg font-bold cursor-pointer">
-                Khóa học
-              </p>
-              <p className="text-[#172554] text-lg font-bold cursor-pointer">
-                Đánh giá
-              </p>
+              <Link to="homeBanner" smooth={true} offset={-50} duration={1000}>
+                <p className="text-[#172554] text-lg font-bold cursor-pointer">
+                  Trang chủ
+                </p>
+                {/* @ts-ignore */}
+              </Link>
+              <Link to="mapSection" smooth={true} offset={-50} duration={1000}>
+                <p className="text-[#172554] text-lg font-bold cursor-pointer">
+                  Giới thiệu
+                </p>
+              </Link>
+              <Link
+                to="coursesSection"
+                smooth={true}
+                offset={-50}
+                duration={1000}
+              >
+                <p className="text-[#172554] text-lg font-bold cursor-pointer">
+                  Khóa học
+                </p>
+              </Link>
+              <Link
+                to="reviewSection"
+                smooth={true}
+                offset={-50}
+                duration={1000}
+              >
+                <p className="text-[#172554] text-lg font-bold cursor-pointer">
+                  Đánh giá
+                </p>
+              </Link>
             </div>
           </div>
         </div>

@@ -4,7 +4,10 @@ const HomeBanner = () => {
   return (
     <div>
       <img src={banner} className="hidden lg:block" />
-      <div className="bg-[#172554] lg:bg-inherit lg:absolute top-1/2 left-1/2 w-full z-[1] lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 pb-5">
+      <div
+        id="homeBanner"
+        className="bg-[#172554] lg:bg-inherit lg:absolute top-1/2 left-1/2 w-full z-[1] lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 pb-5"
+      >
         <div className="max-w-[80%] w-full mx-auto">
           <div className="flex flex-wrap">
             <div className="flex justify-center w-full lg:w-1/2 flex-initial ">

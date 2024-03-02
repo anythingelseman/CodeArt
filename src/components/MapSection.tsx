@@ -2,11 +2,12 @@ import { useState } from "react";
 import map from "./../assets/map.png";
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
+
 const MapSection = () => {
   const [counterOn, setCounterOn] = useState(false);
 
   return (
-    <div className="max-w-[80%] w-full mx-auto mt-10">
+    <div id="mapSection" className="max-w-[80%] w-full mx-auto mt-10">
       {/* @ts-ignore */}
       <ScrollTrigger
         onEnter={() => setCounterOn(true)}
