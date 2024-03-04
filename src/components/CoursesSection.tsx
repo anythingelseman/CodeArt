@@ -3,7 +3,7 @@ import Course from "./Course";
 const CoursesSection = () => {
   return (
     <div id="coursesSection" className="w-full  mt-10 bg-[#fff] pt-8 mx-auto">
-      <div className="max-w-[85%] w-full mx-auto">
+      <div className="max-w-[90%] w-full mx-auto">
         <p className="text-[#172554] font-bold text-[25px] uppercase text-center ">
           Danh sách khóa học
         </p>
