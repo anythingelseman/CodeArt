@@ -2,8 +2,8 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { FaShoppingCart } from "react-icons/fa";
 
-const Testing = () => {
-  const [open, setOpen] = useState(true);
+const Cart = () => {
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -143,4 +143,4 @@ const Testing = () => {
   );
 };
 
-export default Testing;
+export default Cart;

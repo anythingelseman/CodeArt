@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import AboutPage from "./pages/AboutPage";
-import Testing from "./components/Testing";
+import Testing from "./components/Cart";
 
 const App = () => {
   return (

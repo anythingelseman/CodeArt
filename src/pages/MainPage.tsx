@@ -5,13 +5,13 @@ import HomeBanner from "../components/HomeBanner";
 import MapSection from "../components/MapSection";
 import ReasonSection from "../components/ReasonSection";
 import ReviewSection from "../components/ReviewSection";
-import Testing from "../components/Testing";
+import Cart from "../components/Cart";
 
 function MainPage() {
   return (
     <div className="bg-[#fff] mb-0">
       <Header />
-      <Testing />
+      <Cart />
       <main>
         <HomeBanner />
         <MapSection />
