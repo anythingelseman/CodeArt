@@ -13,3 +13,13 @@
 .cart-shadow {
   box-shadow: 0 1px 4px 0;
 }
+
+.title::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.title {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+}

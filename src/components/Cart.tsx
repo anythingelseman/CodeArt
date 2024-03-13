@@ -1,9 +1,25 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { FaShoppingCart } from "react-icons/fa";
+import { useShoppingCart } from "../context/ShoppingCartContext";
+import CartItem from "./CartItem";
+import { CourseType } from "../types/Course";
+import apiClient from "../services/apiClient";
+import formatCurrency from "../utilities/formatCurrency";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
+  const { cartItems, cartQuantity } = useShoppingCart();
+  const [courses, setCourses] = useState<CourseType[]>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await apiClient.get("/course/");
+      setCourses(response.data.courses);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -12,6 +28,9 @@ const Cart = () => {
         onClick={() => setOpen(true)}
       >
         <FaShoppingCart className="m-3 text-3xl" />
+        <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full px-2">
+          {cartQuantity}
+        </span>
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-[1000]" onClose={setOpen}>
@@ -44,7 +63,7 @@ const Cart = () => {
                       <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">
-                            Shopping cart
+                            Giỏ hàng
                           </Dialog.Title>
                           <div className="ml-3 flex h-7 items-center">
                             <button
@@ -53,83 +72,76 @@ const Cart = () => {
                               onClick={() => setOpen(false)}
                             >
                               <span className="absolute -inset-0.5" />
-                              <span className="sr-only">Close panel</span>
+                              <span className="">Đóng</span>
                             </button>
                           </div>
                         </div>
-
-                        {/* <div className="mt-8">
+                        {cartQuantity == 0 && (
+                          <div className="text-center text-lg mt-5">
+                            Chưa có sản phẩm nào trong giỏ hàng
+                          </div>
+                        )}
+                        <div className="mt-8">
                           <div className="flow-root">
-                            <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              {products.map((product) => (
-                                <li key={product.id} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <img
-                                      src={product.imageSrc}
-                                      alt={product.imageAlt}
-                                      className="h-full w-full object-cover object-center"
-                                    />
-                                  </div>
-  
-                                  <div className="ml-4 flex flex-1 flex-col">
-                                    <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>
-                                          <a href={product.href}>{product.name}</a>
-                                        </h3>
-                                        <p className="ml-4">{product.price}</p>
-                                      </div>
-                                      <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                    </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">Qty {product.quantity}</p>
-  
-                                      <div className="flex">
-                                        <button
-                                          type="button"
-                                          className="font-medium text-indigo-600 hover:text-indigo-500"
-                                        >
-                                          Remove
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </li>
+                            <ul
+                              role="list"
+                              className="-my-6 divide-y divide-gray-200"
+                            >
+                              {cartItems.map((cartItem) => (
+                                <CartItem
+                                  key={cartItem.id}
+                                  cartItem={cartItem}
+                                  courses={courses ?? []}
+                                />
                               ))}
                             </ul>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
 
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
-                          <p>Subtotal</p>
-                          <p>$262.00</p>
-                        </div>
-                        <p className="mt-0.5 text-sm text-gray-500">
-                          Shipping and taxes calculated at checkout.
-                        </p>
-                        <div className="mt-6">
-                          <a
-                            href="#"
-                            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                          >
-                            Checkout
-                          </a>
-                        </div>
-                        <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                          <p>Tổng tiền</p>
                           <p>
-                            or{" "}
-                            <button
-                              type="button"
-                              className="font-medium text-indigo-600 hover:text-indigo-500"
-                              onClick={() => setOpen(false)}
-                            >
-                              Continue Shopping
-                              <span aria-hidden="true"> &rarr;</span>
-                            </button>
+                            {formatCurrency(
+                              cartItems.reduce((total, cartItem) => {
+                                const item = courses?.find(
+                                  (i) => i._id === cartItem.id
+                                );
+                                return (
+                                  total + (item?.price || 0) * cartItem.quantity
+                                );
+                              }, 0)
+                            )}
                           </p>
                         </div>
+                        {cartQuantity != 0 && (
+                          <div onClick={() => setOpen(false)} className="mt-6">
+                            <Link to={"/checkout"}>
+                              <a
+                                href="#"
+                                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                              >
+                                Thanh toán
+                              </a>
+                            </Link>
+                          </div>
+                        )}
+                        {cartQuantity != 0 && (
+                          <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                            <p>
+                              hoặc{" "}
+                              <button
+                                type="button"
+                                className="font-medium text-indigo-600 hover:text-indigo-500"
+                                onClick={() => setOpen(false)}
+                              >
+                                tiếp tục mua sắm
+                                <span aria-hidden="true"> &rarr;</span>
+                              </button>
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </Dialog.Panel>

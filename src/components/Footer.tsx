@@ -13,13 +13,13 @@ const Footer = () => {
             Đà Nẵng: 60 Nguyễn Trãi, quận Hải Châu, thành phố Đà Nẵng
           </p>
           <p className="font-normal text-lg text-[#fff]">
-            Đà Nẵng: 60 Nguyễn Trãi, quận Hải Châu, thành phố Đà Nẵng
+            TP. Hồ Chí Minh: 12 Tôn Đức Thắng, Quận Thủ Đức, TP. Hồ Chí Minh.
           </p>
           <p className="font-normal text-lg text-[#fff]">
-            Đà Nẵng: 60 Nguyễn Trãi, quận Hải Châu, thành phố Đà Nẵng
+            Hà Nội: 60 Phan Đình Phùng, quận Ba Đình, Hà Nội
           </p>
         </div>
-        <div className="flex flex-col items-end justify-start w-full lg:w-1/2 flex-initial ">
+        <div className="flex flex-col items-start mt-10 lg:mt-0 lg:items-end justify-start w-full lg:w-1/2 flex-initial ">
           <p className="font-bold text-xl  text-[#fff]">
             Liên hệ với chúng tôi
           </p>

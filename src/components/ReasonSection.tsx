@@ -12,7 +12,7 @@ const ReasonSection = () => {
   }, []);
 
   return (
-    <div className="w-full  mt-10 bg-[#172554] pt-8 mx-auto">
+    <div className="w-full pb-8  mt-10 bg-[#172554] pt-8 mx-auto">
       <div className="max-w-[85%] w-full mx-auto">
         <p className="text-[#fff] font-bold text-[25px] uppercase text-center ">
           Vì sao bạn nên chọn codeart
